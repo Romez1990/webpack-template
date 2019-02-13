@@ -1,7 +1,8 @@
-const path           = require('path');
-// const webpack        = require('webpack');
-const HtmlPlugin     = require('html-webpack-plugin');
-const MiniCssExtract = require('mini-css-extract-plugin');
+const path            = require('path');
+// const webpack         = require('webpack');
+const HtmlPlugin      = require('html-webpack-plugin');
+const MiniCssExtract  = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
@@ -52,20 +53,32 @@ module.exports = {
 		new MiniCssExtract({
 			filename:      '[name].css',
 			chunkFilename: '[id].css'
-		})
+		}),
+		new VueLoaderPlugin()
 	],
 	module:       {
 		rules: [
 			{
 				test:    /\.pug$/,
 				exclude: /(node_modules|bower_components)/,
-				loader:  'pug-loader',
+				// loader:  'pug-loader',
+				oneOf:   [
+					// this applies to `<template lang="pug">` in Vue components
+					{
+						resourceQuery: /^\?vue/,
+						use:           ['pug-plain-loader']
+					},
+					// this applies to pug imports inside JavaScript
+					{
+						use: ['raw-loader', 'pug-plain-loader']
+					}
+				]/*,
 				options: {
 					pretty: isDev
-				}
+				}*/
 			},
 			{
-				test:    /\.styl$/,
+				test:    /\.styl(us)?$/,
 				exclude: /(node_modules|bower_components)/,
 				use:     [
 					{
@@ -98,6 +111,10 @@ module.exports = {
 						plugins: ['@babel/plugin-transform-runtime']
 					}
 				}
+			},
+			{
+				test:   /\.vue$/,
+				loader: 'vue-loader'
 			}
 		]
 	}
