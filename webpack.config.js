@@ -1,7 +1,8 @@
-const path           = require('path');
-const HtmlPlugin     = require('html-webpack-plugin');
-const MiniCssExtract = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path            = require('path');
+const HtmlPlugin      = require('html-webpack-plugin');
+const MiniCssExtract  = require('mini-css-extract-plugin');
+const UglifyJsPlugin  = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const dev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
