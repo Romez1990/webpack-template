@@ -1,0 +1,40 @@
+{
+  "name": "new-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "browserslist": [
+    "> 1%",
+    "last 3 version",
+    "ie > 9"
+  ],
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server",
+    "start": "npm run dev",
+    "prod": "NODE_ENV=production webpack",
+    "build": "npm run prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.7",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.8",
+    "del": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "postcss-loader": "^3.0.0",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
