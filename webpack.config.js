@@ -70,12 +70,17 @@ module.exports = {
 					},
 					// this applies to pug imports inside JavaScript
 					{
-						use: ['raw-loader', 'pug-plain-loader']
+						// use: ['raw-loader', 'pug-plain-loader']
+						use: [
+							{
+								loader:  'pug-loader',
+								options: {
+									pretty: isDev
+								}
+							}
+						]
 					}
-				]/*,
-				options: {
-					pretty: isDev
-				}*/
+				]
 			},
 			{
 				test:    /\.styl(us)?$/,
