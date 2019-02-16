@@ -1,9 +1,7 @@
-import './style.styl'
-import cp from '../components/cp.vue'
 import Vue from 'vue'
+import app from './app.vue'
 
 new Vue({
 	el:     '#app',
-	render: h => h(cp)
+	render: h => h(app)
 });
-
