@@ -13,8 +13,8 @@ const paths = {
 
 module.exports = {
 	entry:        {
-		'index': path.join(paths.src, 'index', 'script.js'),
-		'blog':  path.join(paths.src, 'blog', 'script.js')
+		index: path.join(paths.src, 'index', 'script.js'),
+		blog:  path.join(paths.src, 'blog', 'script.js')
 	},
 	output:       {
 		path:     paths.dist,
@@ -43,12 +43,12 @@ module.exports = {
 		new HtmlPlugin({
 			filename: 'index.html',
 			chunks:   ['index'],
-			template: path.join(paths.src, 'index', 'index.pug')
+			template: path.join(paths.src, 'template.pug')
 		}),
 		new HtmlPlugin({
 			filename: 'blog.html',
 			chunks:   ['blog'],
-			template: path.join(paths.src, 'blog', 'index.pug')
+			template: path.join(paths.src, 'template.pug')
 		}),
 		new MiniCssExtract({
 			filename:      '[name].css',
