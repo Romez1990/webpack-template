@@ -7,24 +7,24 @@
 	user-select none /* No select anything */
 
 //nice-button(#08f, #eee, #023)
-nice-button($bg, $text, $fogging)
+nice-button(bg, text, fogging)
 	display inline-block
 	padding 8px 20px 7px
-	background $bg
-	color $text
+	background bg
+	color text
 	font 16px Sans-serif
 	cursor pointer
 	position relative
 	top 0
 	border-radius 5px
-	box-shadow 0 4px 0 $bg - $fogging
+	box-shadow 0 4px 0 bg - fogging
 	transition 0.2s ease-in-out
 	user-select none
 	border none
 	
 	&:hover
-		background $bg - $fogging
-		box-shadow 0 4px 0 $bg - $fogging * 2
+		background bg - fogging
+		box-shadow 0 4px 0 bg - fogging * 2
 	
 	&:after
 		content ""
@@ -39,7 +39,7 @@ nice-button($bg, $text, $fogging)
 	
 	&:active
 		top 4px
-		box-shadow 0 0 0 $bg - $fogging
+		box-shadow 0 0 0 bg - fogging
 		
 		&:after
 			top -4px
