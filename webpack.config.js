@@ -2,7 +2,6 @@ const path           = require('path');
 // const webpack        = require('webpack');
 const HtmlPlugin     = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
-const del            = require('del');
 
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
@@ -10,8 +9,6 @@ const paths = {
 	src:  path.join(__dirname, 'src'),
 	dist: path.join(__dirname, 'dist')
 };
-
-del(paths.dist);
 
 module.exports = {
 	entry:        {
