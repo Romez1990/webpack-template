@@ -67,7 +67,26 @@ module.exports = {
 			{
 				test:    /\.styl$/,
 				exclude: /(node_modules|bower_components)/,
-				use:     [MiniCssExtract.loader, 'css-loader', 'postcss-loader', 'stylus-loader']
+				use:     [
+					{
+						loader: MiniCssExtract.loader/*,
+						options: {
+							sourceMap: isDev
+						}*/
+					},
+					{
+						loader:  'css-loader',
+						options: {
+							sourceMap: isDev
+						}
+					},
+					{
+						loader: 'stylus-loader'/*,
+						options: {
+							sourceMap: isDev
+						}*/
+					}
+				]
 			},
 			{
 				test:    /\.js$/,
