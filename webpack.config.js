@@ -11,21 +11,27 @@ const paths = {
 };
 
 module.exports = {
-    entry:        {
+    entry:         {
         'index': path.join(paths.src, 'index', 'script.ts'),
         'blog':  path.join(paths.src, 'blog', 'script.ts'),
     },
-    output:       {
+    output:        {
         path:     paths.dist,
         filename: '[name].js',
     },
-    devtool:      isDev ? 'cheap-inline-module-source-map' : false,
-    mode:         isDev ? 'development' : 'production',
-    watch:        isDev,
-    watchOptions: {
+    devtool:       isDev ? 'cheap-inline-module-source-map' : false,
+    mode:          isDev ? 'development' : 'production',
+    watch:         isDev,
+    watchOptions:  {
         aggregateTimeout: 100,
     },
-    devServer:    {
+    resolve:       {
+        extensions: ['.pug', '.css', '.styl', '.js', '.ts', '.tsx', '.json'],
+    },
+    resolveLoader: {
+        moduleExtensions: ['-loader'],
+    },
+    devServer:     {
         compress: true,
         overlay:  {
             errors:   true,
@@ -33,7 +39,7 @@ module.exports = {
         },
         open:     false,
     },
-    plugins:      [
+    plugins:       [
         /*
          new webpack.SourceMapDevToolPlugin({
          filename: '[file].map'
@@ -54,12 +60,12 @@ module.exports = {
             chunkFilename: '[id].css',
         }),
     ],
-    module:       {
+    module:        {
         rules: [
             {
                 test:    /\.pug$/,
                 exclude: /(node_modules|bower_components)/,
-                loader:  'pug-loader',
+                loader:  'pug',
                 options: {
                     pretty: isDev,
                 },
@@ -75,13 +81,13 @@ module.exports = {
                          }*/
                     },
                     {
-                        loader:  'css-loader',
+                        loader:  'css',
                         options: {
                             sourceMap: isDev,
                         },
                     },
                     {
-                        loader: 'stylus-loader',/*,
+                        loader: 'stylus',/*,
                          options: {
                          sourceMap: isDev
                          }*/
@@ -93,14 +99,14 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use:     [
                     {
-                        loader:  'babel-loader',//?optional[]=runtime&stage=0',
+                        loader:  'babel',//?optional[]=runtime&stage=0',
                         options: {
                             presets: ['@babel/preset-env'],
                             plugins: ['@babel/plugin-transform-runtime'],
                         },
                     },
                     {
-                        loader: 'ts-loader',
+                        loader: 'ts',
                     },
                 ],
             },
