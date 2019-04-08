@@ -1,5 +1,4 @@
 const path           = require('path');
-// const webpack        = require('webpack');
 const HtmlPlugin     = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -41,11 +40,6 @@ module.exports = {
         open:     false,
     },
     plugins:       [
-        /*
-         new webpack.SourceMapDevToolPlugin({
-         filename: '[file].map'
-         }),
-         */
         new HtmlPlugin({
             filename: 'index.html',
             chunks:   [ 'index' ],
