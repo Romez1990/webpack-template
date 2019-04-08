@@ -1,16 +1,7 @@
-import './style';
-import obj from '../components/hello';
+import Vue from 'vue';
+import app from './app.vue';
 
-console.log(obj);
-
-let numb: number = 2;
-// numb             = false;
-console.log(numb);
-
-/*
- (async function () {
- const response = await fetch('/sdf.php');
- const json = await response.json();
- console.log(json);
- })();
- */
+new Vue({
+    el:     '#app',
+    render: h => h(app),
+});
