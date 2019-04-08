@@ -2,6 +2,7 @@ const path           = require('path');
 // const webpack        = require('webpack');
 const HtmlPlugin     = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
@@ -19,17 +20,17 @@ module.exports = {
         path:     paths.dist,
         filename: '[name].js',
     },
-    devtool:       isDev ? 'cheap-inline-module-source-map' : false,
+    devtool:       isDev ? 'inline-module-source-map' : false,
     mode:          isDev ? 'development' : 'production',
     watch:         isDev,
     watchOptions:  {
         aggregateTimeout: 100,
     },
     resolve:       {
-        extensions: ['.pug', '.css', '.styl', '.js', '.ts', '.tsx', '.json'],
+        extensions: [ '.pug', '.css', '.styl', '.js', '.ts', '.tsx', '.json' ],
     },
     resolveLoader: {
-        moduleExtensions: ['-loader'],
+        moduleExtensions: [ '-loader' ],
     },
     devServer:     {
         compress: true,
@@ -47,19 +48,25 @@ module.exports = {
          */
         new HtmlPlugin({
             filename: 'index.html',
-            chunks:   ['index'],
+            chunks:   [ 'index' ],
             template: path.join(paths.src, 'index', 'index.pug'),
         }),
         new HtmlPlugin({
             filename: 'blog.html',
-            chunks:   ['blog'],
+            chunks:   [ 'blog' ],
             template: path.join(paths.src, 'blog', 'index.pug'),
         }),
         new MiniCssExtract({
             filename:      '[name].css',
             chunkFilename: '[id].css',
+            sourceMap:     isDev,
         }),
     ],
+    optimization:  {
+        minimizer: [ new UglifyJsPlugin({
+            sourceMap: true,
+        }) ],
+    },
     module:        {
         rules: [
             {
@@ -75,10 +82,10 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use:     [
                     {
-                        loader: MiniCssExtract.loader,/*,
-                         options: {
-                         sourceMap: isDev
-                         }*/
+                        loader:  MiniCssExtract.loader,
+                        options: {
+                            sourceMap: isDev,
+                        },
                     },
                     {
                         loader:  'css',
@@ -87,10 +94,10 @@ module.exports = {
                         },
                     },
                     {
-                        loader: 'stylus',/*,
-                         options: {
-                         sourceMap: isDev
-                         }*/
+                        loader:  'stylus',
+                        options: {
+                            sourceMap: isDev,
+                        },
                     },
                 ],
             },
@@ -101,8 +108,8 @@ module.exports = {
                     {
                         loader:  'babel',//?optional[]=runtime&stage=0',
                         options: {
-                            presets: ['@babel/preset-env'],
-                            plugins: ['@babel/plugin-transform-runtime'],
+                            presets: [ '@babel/preset-env' ],
+                            plugins: [ '@babel/plugin-transform-runtime' ],
                         },
                     },
                     {
