@@ -13,8 +13,8 @@ const paths = {
 
 module.exports = {
     entry:         {
-        'index': path.join(paths.src, 'index', 'script.js'),
-        'blog':  path.join(paths.src, 'blog', 'script.js'),
+        'index': path.join(paths.src, 'index', 'script.ts'),
+        'blog':  path.join(paths.src, 'blog', 'script.ts'),
     },
     output:        {
         path:     paths.dist,
@@ -27,7 +27,7 @@ module.exports = {
         aggregateTimeout: 100,
     },
     resolve:       {
-        extensions: [ '.pug', '.styl', '.js', '.json' ],
+        extensions: [ '.pug', '.styl', '.ts', '.json' ],
     },
     resolveLoader: {
         moduleExtensions: [ '-loader' ],
@@ -72,7 +72,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 use:  [
                     {
                         loader:  'babel',
@@ -81,6 +81,7 @@ module.exports = {
                             // plugins: [ '@babel/plugin-transform-runtime' ],
                         },
                     },
+                    'ts',
                 ],
             },
             {

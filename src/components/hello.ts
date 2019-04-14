@@ -1,6 +1,7 @@
+const word: string = 'world';
 export default {
-    word: 'world',
-    say() {
+    word: word,
+    say(): void {
         console.log(`Hello, ${this.word}`);
     },
 };
