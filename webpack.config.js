@@ -17,7 +17,7 @@ module.exports = {
     },
     output:        {
         path:     paths.dist,
-        filename: '[name].js',
+        filename: 'js/[name].js',
     },
     devtool:       dev ? 'inline-module-source-map' : false,
     mode:          dev ? 'development' : 'production',
@@ -51,7 +51,7 @@ module.exports = {
             template: path.join(paths.src, 'blog', 'index.pug'),
         }),
         new MiniCssExtract({
-            filename:      '[name].css',
+            filename:      'css/[name].css',
             chunkFilename: '[id].css',
             sourceMap:     dev,
         }),
