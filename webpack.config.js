@@ -26,7 +26,7 @@ module.exports = {
         aggregateTimeout: 100,
     },
     resolve:       {
-        extensions: [ '.pug', '.css', '.styl', '.js', '.ts', '.tsx', '.json' ],
+        extensions: [ '.pug', '.styl', '.ts', '.tsx', '.json' ],
     },
     resolveLoader: {
         moduleExtensions: [ '-loader' ],
