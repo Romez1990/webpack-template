@@ -3,7 +3,7 @@ const HtmlPlugin     = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+const dev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 const paths = {
     src:  path.join(__dirname, 'src'),
@@ -19,9 +19,9 @@ module.exports = {
         path:     paths.dist,
         filename: '[name].js',
     },
-    devtool:       isDev ? 'inline-module-source-map' : false,
-    mode:          isDev ? 'development' : 'production',
-    watch:         isDev,
+    devtool:       dev ? 'inline-module-source-map' : false,
+    mode:          dev ? 'development' : 'production',
+    watch:         dev,
     watchOptions:  {
         aggregateTimeout: 100,
     },
@@ -53,7 +53,7 @@ module.exports = {
         new MiniCssExtract({
             filename:      '[name].css',
             chunkFilename: '[id].css',
-            sourceMap:     isDev,
+            sourceMap:     dev,
         }),
     ],
     optimization:  {
@@ -68,7 +68,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader:  'pug',
                 options: {
-                    pretty: isDev,
+                    pretty: dev,
                 },
             },
             {
@@ -78,19 +78,19 @@ module.exports = {
                     {
                         loader:  MiniCssExtract.loader,
                         options: {
-                            sourceMap: isDev,
+                            sourceMap: dev,
                         },
                     },
                     {
                         loader:  'css',
                         options: {
-                            sourceMap: isDev,
+                            sourceMap: dev,
                         },
                     },
                     {
                         loader:  'stylus',
                         options: {
-                            sourceMap: isDev,
+                            sourceMap: dev,
                         },
                     },
                 ],
