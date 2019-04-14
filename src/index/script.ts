@@ -1,4 +1,7 @@
-import './style';
-import hello from '../components/hello';
+import Vue from 'vue';
+import app from './app.vue';
 
-hello.say();
+new Vue({
+    el:     '#app',
+    render: h => h(app),
+});

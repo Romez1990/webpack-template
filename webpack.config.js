@@ -3,6 +3,7 @@ const Clean          = require('clean-webpack-plugin');
 const HtmlPlugin     = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Vue            = require('vue-loader/lib/plugin');
 
 const dev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
@@ -45,17 +46,18 @@ module.exports = {
         new HtmlPlugin({
             filename: 'index.html',
             chunks:   [ 'index' ],
-            template: path.join(paths.src, 'index', 'index.pug'),
+            template: path.join(paths.src, 'components', 'template.pug'),
         }),
         new HtmlPlugin({
             filename: 'blog.html',
             chunks:   [ 'blog' ],
-            template: path.join(paths.src, 'blog', 'index.pug'),
+            template: path.join(paths.src, 'components', 'template.pug'),
         }),
         new MiniCssExtract({
             filename:      'css/[name].css',
             chunkFilename: '[id].css',
         }),
+        new Vue(),
     ],
     optimization:  {
         minimizer: [
@@ -65,11 +67,25 @@ module.exports = {
     module:        {
         rules: [
             {
-                test:    /\.pug$/,
-                loader:  'pug',
-                options: {
-                    pretty: dev,
-                },
+                test:  /\.pug$/,
+                oneOf: [
+                    // this applies to `<template lang="pug">` in Vue components
+                    {
+                        resourceQuery: /^\?vue/,
+                        use:           [ 'pug-plain-loader' ],
+                    },
+                    // this applies to pug imports inside JavaScript
+                    {
+                        use: [
+                            {
+                                loader:  'pug-loader',
+                                options: {
+                                    pretty: dev,
+                                },
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 test: /\.ts$/,
@@ -85,13 +101,17 @@ module.exports = {
                 ],
             },
             {
-                test: /\.styl$/,
+                test: /\.styl(us)?$/,
                 use:  [
                     MiniCssExtract.loader,
                     { loader: 'css', options: { importLoaders: 2, sourceMap: dev, url: false } },
                     'postcss',
                     'stylus',
                 ],
+            },
+            {
+                test:   /\.vue$/,
+                loader: 'vue-loader',
             },
         ],
     },
